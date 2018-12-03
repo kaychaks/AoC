@@ -22,3 +22,4 @@ library
 
   exposed-modules:    AoC
                       AoC.Y2018.Day1
+                      AoC.Y2018.Day2

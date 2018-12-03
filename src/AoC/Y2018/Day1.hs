@@ -1,9 +1,9 @@
 module AoC.Y2018.Day1(
   makeFreqChanges
   , calcFreq
-  , doPuzzle1
+  , doDay1Puzzle1
   , checkRepeating
-  , doPuzzle2
+  , doDay1Puzzle2
 ) where
 
 import Papa
@@ -31,8 +31,8 @@ checkRepeating :: FreqChanges -> Maybe Int
 checkRepeating  = hasDuplicates S.empty . Just . scanl (+) 0 . cycle
                       
 
-doPuzzle1 :: FilePath -> IO Int
-doPuzzle1 = (<$>) calcFreq  . makeFreqChanges
+doDay1Puzzle1 :: FilePath -> IO Int
+doDay1Puzzle1 = (<$>) calcFreq  . makeFreqChanges
 
-doPuzzle2 :: FilePath -> IO (Maybe Int)
-doPuzzle2 = (<$>) checkRepeating . makeFreqChanges
+doDay1Puzzle2 :: FilePath -> IO (Maybe Int)
+doDay1Puzzle2 = (<$>) checkRepeating . makeFreqChanges
