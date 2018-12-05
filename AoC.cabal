@@ -14,12 +14,15 @@ library
   default-extensions:  NoImplicitPrelude
 
   build-depends:       base <5 && >=3
-                     , papa
-                     , text
-                     , containers
+                     , papa >= 0.3.0
+                     , text >= 1.2.0
+                     , containers >= 0.6
+                     , megaparsec >= 7.0.0
+                     , parser-combinators >= 1.0.0
 
   hs-source-dirs:      src
 
   exposed-modules:    AoC
                       AoC.Y2018.Day1
                       AoC.Y2018.Day2
+                      AoC.Y2018.Day3
