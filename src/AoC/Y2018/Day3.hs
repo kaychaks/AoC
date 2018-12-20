@@ -6,10 +6,11 @@ import Papa
 import qualified Data.Text as T (unpack)
 import qualified Data.Text.IO as T (readFile)
 import qualified Data.Map.Strict as C
-import qualified Control.Monad.Combinators as P
-import qualified Text.Megaparsec as P
-import qualified Text.Megaparsec.Char as P
-import qualified Text.Megaparsec.Char.Lexer as L
+
+import AoC.Util.Parser
+import qualified Text.Megaparsec as P(someTill,parse,endBy1)
+import qualified Text.Megaparsec.Char as P(char,eol)
+import qualified Text.Megaparsec.Char.Lexer as L(decimal)
 
 newtype CellID = CellID (Integer,Integer) deriving (Eq, Ord, Show)
 
@@ -23,22 +24,6 @@ data ClaimEntry = ClaimEntry {
   , _height :: Integer
   } deriving Show
 makeLenses ''ClaimEntry
-
--- | Parser stuff
-
-type Parser = P.Parsec Void String
-
-sc :: Parser ()
-sc = L.space P.space1 P.empty P.empty
-
-lexeme :: Parser a -> Parser a
-lexeme = L.lexeme sc
-
-symbol :: String -> Parser String
-symbol = L.symbol sc
-
-integer :: Parser Integer
-integer = lexeme L.decimal
 
 headPartial :: [Integer] -> Integer
 headPartial [x] = x
@@ -65,7 +50,6 @@ parseClaimsInput' p s = let ps = P.parse p "" s
 parseClaimsInput :: FilePath -> IO [ClaimEntry]
 parseClaimsInput f = parseClaimsInput' claimParser . T.unpack <$> T.readFile f
 
--- | Parser stuff complete
 
 claimLoc :: ClaimEntry -> [(CellID, ClaimID)]
 claimLoc c = let cs :: [(Integer, Integer)]
