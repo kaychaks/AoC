@@ -1,0 +1,10 @@
+mod day1;
+mod day2;
+mod day3;
+mod day4;
+mod day5;
+pub(crate) use day1::*;
+pub(crate) use day2::*;
+pub(crate) use day3::*;
+pub(crate) use day4::*;
+pub(crate) use day5::*;
