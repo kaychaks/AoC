@@ -1,48 +1,51 @@
 use aoc_lib::{Input, Solver};
 
 impl Solver for Day8 {
-  fn day() -> u8 {
-      8
-  }
+    fn day() -> u8 {
+        8
+    }
+    fn year() -> u16 {
+        2022
+    }
 
-  fn solution_part1(input: Input) -> Option<Self::OutputPart1> {
-      let count = Day8::new(input)
-          .reduce_grid(
-              |xs| {
-                  xs.iter()
-                      .map(|x| x.0)
-                      .reduce(|a, b| a || b)
-                      .unwrap_or(false)
-              },
-              true,
-          )
-          .iter()
-          .filter(|x| **x)
-          .count();
+    fn solution_part1(input: Input) -> Option<Self::OutputPart1> {
+        let count = Day8::new(input)
+            .reduce_grid(
+                |xs| {
+                    xs.iter()
+                        .map(|x| x.0)
+                        .reduce(|a, b| a || b)
+                        .unwrap_or(false)
+                },
+                true,
+            )
+            .iter()
+            .filter(|x| **x)
+            .count();
 
-      Some(count)
-  }
+        Some(count)
+    }
 
-  fn solution_part2(input: Input) -> Option<Self::OutputPart2> {
-      let count = Day8::new(input)
-          .reduce_grid(
-              |xs| {
-                  xs.iter()
-                      .map(|x| x.1.len())
-                      .reduce(|a, b| a * b)
-                      .unwrap_or(1)
-              },
-              1,
-          )
-          .iter()
-          .copied()
-          .max();
+    fn solution_part2(input: Input) -> Option<Self::OutputPart2> {
+        let count = Day8::new(input)
+            .reduce_grid(
+                |xs| {
+                    xs.iter()
+                        .map(|x| x.1.len())
+                        .reduce(|a, b| a * b)
+                        .unwrap_or(1)
+                },
+                1,
+            )
+            .iter()
+            .copied()
+            .max();
 
-      count
-  }
+        count
+    }
 
-  type OutputPart1 = usize;
-  type OutputPart2 = usize;
+    type OutputPart1 = usize;
+    type OutputPart2 = usize;
 }
 
 #[derive(Debug)]

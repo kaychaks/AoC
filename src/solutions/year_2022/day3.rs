@@ -30,6 +30,9 @@ impl Day3 {
 impl Solver for Day3 {
     type OutputPart1 = usize;
     type OutputPart2 = usize;
+    fn year() -> u16 {
+        2022
+    }
 
     fn day() -> u8 {
         3

@@ -16,6 +16,9 @@ impl Solver for Day12 {
     fn day() -> u8 {
         12
     }
+    fn year() -> u16 {
+        2022
+    }
     type OutputPart1 = usize;
     type OutputPart2 = usize;
     fn solution_part1(input: aoc_lib::Input) -> Option<Self::OutputPart1> {

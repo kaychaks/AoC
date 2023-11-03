@@ -68,6 +68,9 @@ impl Solver for Day22 {
     fn day() -> u8 {
         22
     }
+    fn year() -> u16 {
+        2022
+    }
 
     fn solution_part1(input: aoc_lib::Input) -> Option<Self::OutputPart1> {
         let (mut board, commands) = Board::setup(input);

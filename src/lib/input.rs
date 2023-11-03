@@ -11,7 +11,8 @@ pub struct Input {
 }
 
 pub struct Day {
-    _day: u8,
+    day: u8,
+    year: u16,
 }
 
 pub enum Part {
@@ -23,17 +24,20 @@ impl Part {}
 
 impl Debug for Day {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.write_str(&format!("{}", self._day))
+        f.write_str(&format!("{}", self.day))
     }
 }
 
-impl TryFrom<u8> for Day {
+impl TryFrom<(u8, u16)> for Day {
     type Error = &'static str;
-    fn try_from(value: u8) -> Result<Self, Self::Error> {
-        if (1..=25).contains(&value) {
-            Ok(Day { _day: value })
+    fn try_from(value: (u8, u16)) -> Result<Self, Self::Error> {
+        if (1..=25).contains(&value.0) {
+            Ok(Day {
+                day: value.0,
+                year: value.1,
+            })
         } else {
-            Err("Day value should be between 1 and 25")
+            Err("Day and Year values are invalid")
         }
     }
 }
@@ -68,7 +72,10 @@ impl Input {
         // };
 
         // let data_file_path = PathBuf::new().join("data").join(&d).join(p);
-        let data_file_path = PathBuf::new().join("data").join(format!("day{}.txt", day._day));
+        // let year = year.unwrap_or(chrono::Utc::now().year());
+        let data_file_path = PathBuf::new()
+            .join("data")
+            .join(format!("{}/day{}.txt", day.year, day.day));
         let data_file = File::open(&data_file_path)
             .unwrap_or_else(|_| panic!("could not open data file {:?}", data_file_path.as_path()));
         let buf_reader = BufReader::new(data_file);

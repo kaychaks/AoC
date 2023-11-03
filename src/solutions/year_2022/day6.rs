@@ -66,6 +66,9 @@ impl Solver for Day6 {
     fn solution_part2(input: aoc_lib::Input) -> Option<Self::OutputPart2> {
         Some(Day6::new(14).common_sol(input).chars_processed)
     }
+    fn year() -> u16 {
+        2022
+    }
     fn day() -> u8 {
         6
     }

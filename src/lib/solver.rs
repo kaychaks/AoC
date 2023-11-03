@@ -6,8 +6,9 @@ pub trait Solver {
     type OutputPart1: Debug;
     type OutputPart2: Debug;
     fn day() -> u8;
+    fn year() -> u16;
     fn input() -> Input {
-        let day = Day::try_from(Self::day()).expect("could not parse day");
+        let day = Day::try_from((Self::day(), Self::year())).expect("could not parse day");
         Input::new(day)
     }
     fn solution_part1(input: Input) -> Option<Self::OutputPart1>;

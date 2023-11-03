@@ -20,34 +20,37 @@ enum PixelType {
 }
 
 impl Solver for Day10 {
-  fn day() -> u8 {
-      10
-  }
-  fn solution_part1(input: aoc_lib::Input) -> Option<Self::OutputPart1> {
-      let mut d = Day10::default();
-      d.load_instructions(input.lines.iter().map(Instruction::from), |_, _| {});
+    fn day() -> u8 {
+        10
+    }
+    fn year() -> u16 {
+        2022
+    }
+    fn solution_part1(input: aoc_lib::Input) -> Option<Self::OutputPart1> {
+        let mut d = Day10::default();
+        d.load_instructions(input.lines.iter().map(Instruction::from), |_, _| {});
 
-      let s = [20, 60, 100, 140, 180, 220]
-          .map(|i| (i, d.cycles[i - 1]))
-          .iter()
-          .map(|(n, (_, during, _))| *n as i32 * during)
-          .sum::<i32>();
-      Some(s)
-  }
+        let s = [20, 60, 100, 140, 180, 220]
+            .map(|i| (i, d.cycles[i - 1]))
+            .iter()
+            .map(|(n, (_, during, _))| *n as i32 * during)
+            .sum::<i32>();
+        Some(s)
+    }
 
-  fn solution_part2(input: aoc_lib::Input) -> Option<Self::OutputPart2> {
-      let mut crt = Crt::default();
-      let mut d = Day10::default();
-      d.load_instructions(input.lines.iter().map(Instruction::from), |x, y| {
-          crt.handle_cyle(x, y);
-      });
+    fn solution_part2(input: aoc_lib::Input) -> Option<Self::OutputPart2> {
+        let mut crt = Crt::default();
+        let mut d = Day10::default();
+        d.load_instructions(input.lines.iter().map(Instruction::from), |x, y| {
+            crt.handle_cyle(x, y);
+        });
 
-      println!("{:?}", crt.clone());
-      Some(())
-  }
+        println!("{:?}", crt.clone());
+        Some(())
+    }
 
-  type OutputPart1 = i32;
-  type OutputPart2 = ();
+    type OutputPart1 = i32;
+    type OutputPart2 = ();
 }
 
 impl From<PixelType> for usize {
@@ -145,7 +148,6 @@ impl Day10 {
         self
     }
 }
-
 
 #[derive(Debug)]
 enum Instruction {

@@ -140,6 +140,9 @@ impl Day5 {
 impl Solver for Day5 {
     type OutputPart1 = String;
     type OutputPart2 = String;
+    fn year() -> u16 {
+        2022
+    }
 
     fn day() -> u8 {
         5

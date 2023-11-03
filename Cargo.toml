@@ -11,5 +11,7 @@ path = "src/lib/mod.rs"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+chrono = { version = "0.4.31", features = ["serde"] }
 indexmap = "1.9.2"
 nom = "7"
+paste = "1.0.14"

@@ -34,6 +34,9 @@ impl Solver for Day11 {
     fn day() -> u8 {
         11
     }
+    fn year() -> u16 {
+        2022
+    }
     type OutputPart1 = u128;
     type OutputPart2 = u128;
 
