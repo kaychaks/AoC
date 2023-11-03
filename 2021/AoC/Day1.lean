@@ -54,13 +54,15 @@ section Part2
   
 end Part2
 
-def run : IO (Nat × Nat) := do
+def run : IO Unit := do
   let day1 := "./data/day1.txt"
   let readings <- lines day1
 
   let part1Total := totalIncr (Sum.inr "") readings
   let part2Total := totalIncr (Sum.inl 0) (ys := threeWindowSums readings)
 
-  return (part1Total, part2Total)
+  IO.println (part1Total, part2Total)
+
+  end Day1
 
 
