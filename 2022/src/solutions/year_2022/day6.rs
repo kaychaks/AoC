@@ -1,6 +1,6 @@
 use std::collections::{HashSet, VecDeque};
 
-use aoc_lib::{Day, Input, Solver};
+use aoc_lib::{Input, Solver};
 
 pub struct Day6 {
     seq_checker: VecDeque<char>,
@@ -60,16 +60,15 @@ impl Day6 {
 }
 
 impl Solver for Day6 {
-    fn solution_part1(input: Input) -> Result<Self::OutputPart1, Self::Error> {
-        Ok(Day6::new(4).common_sol(input).chars_processed)
+    fn solution_part1(input: Input) -> Option<Self::OutputPart1> {
+        Some(Day6::new(4).common_sol(input).chars_processed)
     }
-    fn solution_part2(input: aoc_lib::Input) -> Result<Self::OutputPart2, Self::Error> {
-        Ok(Day6::new(14).common_sol(input).chars_processed)
+    fn solution_part2(input: aoc_lib::Input) -> Option<Self::OutputPart2> {
+        Some(Day6::new(14).common_sol(input).chars_processed)
     }
-    fn day() -> aoc_lib::Day {
-        Day::try_from(6).expect("could not parse day")
+    fn day() -> u8 {
+        6
     }
-    type Error = String;
     type OutputPart1 = u16;
     type OutputPart2 = u16;
 }

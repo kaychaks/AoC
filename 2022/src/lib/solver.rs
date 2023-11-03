@@ -1,21 +1,21 @@
 use std::fmt::Debug;
 
-use crate::{Day, Input, Part};
+use crate::{Day, Input};
 
 pub trait Solver {
     type OutputPart1: Debug;
     type OutputPart2: Debug;
-    type Error;
-    fn day() -> Day;
-    fn input(p: Part) -> Input {
-        Input::new(Self::day(), p)
+    fn day() -> u8;
+    fn input() -> Input {
+        let day = Day::try_from(Self::day()).expect("could not parse day");
+        Input::new(day)
     }
-    fn solution_part1(input: Input) -> Result<Self::OutputPart1, Self::Error>;
-    fn solution_part2(input: Input) -> Result<Self::OutputPart2, Self::Error>;
-    fn solve_part1() -> Result<Self::OutputPart1, Self::Error> {
-        Self::solution_part1(Self::input(Part::Part1))
+    fn solution_part1(input: Input) -> Option<Self::OutputPart1>;
+    fn solution_part2(input: Input) -> Option<Self::OutputPart2>;
+    fn solve_part1() -> Result<Self::OutputPart1, String> {
+        Self::solution_part1(Self::input()).ok_or_else(|| "could not solve".to_string())
     }
-    fn solve_part2() -> Result<Self::OutputPart2, Self::Error> {
-        Self::solution_part2(Self::input(Part::Part2))
+    fn solve_part2() -> Result<Self::OutputPart2, String> {
+        Self::solution_part2(Self::input()).ok_or_else(|| "could not solve".to_string())
     }
 }

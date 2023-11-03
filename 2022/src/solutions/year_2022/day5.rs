@@ -1,4 +1,4 @@
-use aoc_lib::{Day, Input, Solver};
+use aoc_lib::{Input, Solver};
 use nom::{
     branch::alt,
     bytes::complete::tag,
@@ -138,19 +138,18 @@ impl Day5 {
 }
 
 impl Solver for Day5 {
-    type Error = String;
     type OutputPart1 = String;
     type OutputPart2 = String;
 
-    fn day() -> aoc_lib::Day {
-        Day::try_from(5).unwrap()
+    fn day() -> u8 {
+        5
     }
 
-    fn solution_part1(input: aoc_lib::Input) -> Result<Self::OutputPart1, Self::Error> {
-        Ok(Day5::new(input).interpret_move_commands(false).output())
+    fn solution_part1(input: aoc_lib::Input) -> Option<Self::OutputPart1> {
+        Some(Day5::new(input).interpret_move_commands(false).output())
     }
 
-    fn solution_part2(input: aoc_lib::Input) -> Result<Self::OutputPart2, Self::Error> {
-        Ok(Day5::new(input).interpret_move_commands(true).output())
+    fn solution_part2(input: aoc_lib::Input) -> Option<Self::OutputPart2> {
+        Some(Day5::new(input).interpret_move_commands(true).output())
     }
 }

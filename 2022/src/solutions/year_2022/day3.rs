@@ -1,6 +1,6 @@
 use std::collections::HashSet;
 
-use aoc_lib::{Day, Solver};
+use aoc_lib::Solver;
 
 pub struct Day3 {
     priorities: Vec<char>,
@@ -28,15 +28,14 @@ impl Day3 {
 }
 
 impl Solver for Day3 {
-    type Error = String;
     type OutputPart1 = usize;
     type OutputPart2 = usize;
 
-    fn day() -> aoc_lib::Day {
-        Day::try_from(3).unwrap()
+    fn day() -> u8 {
+        3
     }
 
-    fn solution_part2(input: aoc_lib::Input) -> Result<Self::OutputPart2, Self::Error> {
+    fn solution_part2(input: aoc_lib::Input) -> Option<Self::OutputPart2> {
         let day3 = Day3::default();
         input
             .lines
@@ -44,10 +43,9 @@ impl Solver for Day3 {
             .flat_map(|xs| day3.common_char(xs.iter().map(|x| x.as_str()).collect::<Vec<&str>>()))
             .flat_map(|x| day3.priority(&x))
             .reduce(|a, b| a + b)
-            .ok_or_else(|| "could not solve".to_string())
     }
 
-    fn solution_part1(input: aoc_lib::Input) -> Result<Self::OutputPart1, Self::Error> {
+    fn solution_part1(input: aoc_lib::Input) -> Option<Self::OutputPart1> {
         let day3 = Day3::default();
         input
             .lines
@@ -58,6 +56,5 @@ impl Solver for Day3 {
             })
             .flat_map(|z| day3.priority(&z))
             .reduce(|a, b| a + b)
-            .ok_or_else(|| "could not solve".to_string())
     }
 }

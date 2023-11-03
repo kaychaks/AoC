@@ -1,6 +1,6 @@
 use std::{collections::HashSet, ops::Range};
 
-use aoc_lib::{Day, Input, Solver};
+use aoc_lib::{Input, Solver};
 
 pub struct Day4 {}
 
@@ -44,19 +44,18 @@ impl Day4 {
 }
 
 impl Solver for Day4 {
-    type Error = String;
     type OutputPart1 = usize;
     type OutputPart2 = usize;
 
-    fn day() -> aoc_lib::Day {
-        Day::try_from(4).unwrap()
+    fn day() -> u8 {
+        4
     }
 
-    fn solution_part1(input: aoc_lib::Input) -> Result<Self::OutputPart1, Self::Error> {
-        Ok(Day4::common_sol(input, Day4::is_contained))
+    fn solution_part1(input: aoc_lib::Input) -> Option<Self::OutputPart1> {
+        Some(Day4::common_sol(input, Day4::is_contained))
     }
 
-    fn solution_part2(input: aoc_lib::Input) -> Result<Self::OutputPart2, Self::Error> {
-        Ok(Day4::common_sol(input, Day4::has_overlap))
+    fn solution_part2(input: aoc_lib::Input) -> Option<Self::OutputPart2> {
+        Some(Day4::common_sol(input, Day4::has_overlap))
     }
 }

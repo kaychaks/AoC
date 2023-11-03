@@ -1,6 +1,6 @@
 use std::{collections::HashMap, fmt::Debug};
 
-use aoc_lib::{Day, Solver};
+use aoc_lib::Solver;
 use nom::{
     branch::alt,
     bytes::complete::tag,
@@ -12,15 +12,14 @@ use nom::{
 };
 
 impl Solver for Day7 {
-    fn day() -> aoc_lib::Day {
-        Day::try_from(7).expect("could not parse day")
+    fn day() -> u8 {
+        7
     }
 
-    type Error = String;
     type OutputPart1 = u32;
     type OutputPart2 = u32;
 
-    fn solution_part1(input: aoc_lib::Input) -> Result<Self::OutputPart1, Self::Error> {
+    fn solution_part1(input: aoc_lib::Input) -> Option<Self::OutputPart1> {
         let builder = FSBuilder::default().interpret(&mut input.lines.into_iter());
         let xs: u32 = builder
             .fs
@@ -29,19 +28,17 @@ impl Solver for Day7 {
             .map(|x| x.1)
             .sum();
 
-        Ok(xs)
+        Some(xs)
     }
 
-    fn solution_part2(input: aoc_lib::Input) -> Result<Self::OutputPart2, Self::Error> {
+    fn solution_part2(input: aoc_lib::Input) -> Option<Self::OutputPart2> {
         let builder = FSBuilder::default().interpret(&mut input.lines.into_iter());
         let k: Vec<String> = vec![];
         let total = builder.fs.get(&k).unwrap_or(&0);
         let min_needed = 30_000_000 - (70_000_000 - total);
         let mut xs = builder.fs.iter().map(|x| x.1).collect::<Vec<_>>();
         xs.sort();
-        let y = xs.iter().find(|&&x| x >= &min_needed).copied().copied();
-
-        y.ok_or_else(|| "could not solve".to_string())
+        xs.iter().find(|&&x| x >= &min_needed).copied().copied()
     }
 }
 

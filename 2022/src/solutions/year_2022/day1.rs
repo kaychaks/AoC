@@ -1,4 +1,4 @@
-use aoc_lib::{Day, Input, Solver};
+use aoc_lib::{Input, Solver};
 
 #[derive(Debug)]
 pub(crate) struct Day1 {}
@@ -23,23 +23,15 @@ impl Day1 {
 impl Solver for Day1 {
     type OutputPart1 = u32;
     type OutputPart2 = u32;
-    type Error = String;
-    fn day() -> aoc_lib::Day {
-        Day::try_from(1).expect("invalid day")
+    fn day() -> u8 {
+        1
     }
-    fn solution_part1(input: Input) -> Result<Self::OutputPart1, Self::Error> {
+    fn solution_part1(input: Input) -> Option<Self::OutputPart1> {
         let x = Day1::get_sorted(input);
-        x.first()
-            .copied()
-            .ok_or_else(|| "no solution found".to_string())
+        x.first().copied()
     }
-    fn solution_part2(input: Input) -> Result<Self::OutputPart2, Self::Error> {
+    fn solution_part2(input: Input) -> Option<Self::OutputPart2> {
         let x = Day1::get_sorted(input);
-        x.split_at(3)
-            .0
-            .iter()
-            .copied()
-            .reduce(|a, b| a + b)
-            .ok_or_else(|| "no solution found".to_string())
+        x.split_at(3).0.iter().copied().reduce(|a, b| a + b)
     }
 }

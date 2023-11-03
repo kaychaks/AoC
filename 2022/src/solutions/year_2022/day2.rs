@@ -1,4 +1,4 @@
-use aoc_lib::{Day, Input, Solver};
+use aoc_lib::{Input, Solver};
 
 #[derive(Clone, Copy)]
 enum RPS {
@@ -143,7 +143,7 @@ impl Day2 {
         }
     }
 
-    fn play_rounds<F>(input: Input, map_player: F) -> Result<u32, String>
+    fn play_rounds<F>(input: Input, map_player: F) -> Option<u32>
     where
         F: Fn((&str, &str)) -> (Option<Player>, Option<Player>),
     {
@@ -161,19 +161,17 @@ impl Day2 {
             .collect::<Vec<_>>()
             .into_iter()
             .reduce(|a, b| a + b)
-            .ok_or_else(|| "could not solve".to_string())
     }
 }
 
 impl Solver for Day2 {
     type OutputPart1 = u32;
     type OutputPart2 = u32;
-    type Error = String;
-    fn day() -> aoc_lib::Day {
-        Day::try_from(2).expect("valid date")
+    fn day() -> u8 {
+        2
     }
 
-    fn solution_part1(input: aoc_lib::Input) -> Result<Self::OutputPart1, Self::Error> {
+    fn solution_part1(input: aoc_lib::Input) -> Option<Self::OutputPart1> {
         Day2::play_rounds(input, |(a, b)| {
             (
                 RPS::try_from(a).ok().map(Player::elf),
@@ -182,7 +180,7 @@ impl Solver for Day2 {
         })
     }
 
-    fn solution_part2(input: aoc_lib::Input) -> Result<Self::OutputPart2, Self::Error> {
+    fn solution_part2(input: aoc_lib::Input) -> Option<Self::OutputPart2> {
         Day2::play_rounds(input, |(a, b)| {
             let opponents_move = RPS::try_from(a).ok();
             let my_move = opponents_move.map(|m| RPS::predict_move(b, m));

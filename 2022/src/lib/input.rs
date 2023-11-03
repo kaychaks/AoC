@@ -59,15 +59,16 @@ impl Debug for Part {
 }
 
 impl Input {
-    pub fn new(day: Day, part: Part) -> Self {
-        let mut d = String::from("day");
-        d.push_str(&day._day.to_string());
-        let p = match part {
-            Part::Part1 => "part1.txt",
-            Part::Part2 => "part2.txt",
-        };
+    pub fn new(day: Day) -> Self {
+        // let mut d = String::from("day");
+        // d.push_str(&day._day.to_string());
+        // let p = match part {
+        //     Part::Part1 => "part1.txt",
+        //     Part::Part2 => "part2.txt",
+        // };
 
-        let data_file_path = PathBuf::new().join("data").join(&d).join(p);
+        // let data_file_path = PathBuf::new().join("data").join(&d).join(p);
+        let data_file_path = PathBuf::new().join("data").join(format!("day{}.txt", day._day));
         let data_file = File::open(&data_file_path)
             .unwrap_or_else(|_| panic!("could not open data file {:?}", data_file_path.as_path()));
         let buf_reader = BufReader::new(data_file);
