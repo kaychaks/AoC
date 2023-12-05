@@ -3,6 +3,6 @@ use aoc_lib::{solve, Solver};
 pub mod solutions;
 
 fn main() {
-    let sol = solve!(2022; 1; 2);
-    println!("{:?}", sol);
+  let sol = solve!(2023; 2; 2);
+  println!("{:?}", sol);
 }
