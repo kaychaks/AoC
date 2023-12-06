@@ -1,11 +1,10 @@
-use std::{collections::HashSet, str::Chars};
+use std::collections::HashSet;
 
 use aoc_lib::{create_solution, Input, Solver};
 
 #[derive(Debug, Clone)]
 pub struct Day3 {
   engine_schematic: EngineSchematic,
-  part_numbers: Vec<u64>,
 }
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Hash)]
@@ -51,12 +50,6 @@ impl Point {
       },
     ])
   }
-}
-
-#[derive(Debug, Clone)]
-struct Digit {
-  digit: char,
-  point: Point,
 }
 
 #[derive(Debug, Clone)]
@@ -112,7 +105,6 @@ impl SpecialChar {
 #[derive(Debug, Clone)]
 struct EngineSchematic {
   special_chars: Vec<SpecialChar>,
-  digits: Vec<Digit>,
   numbers: Vec<Number>,
 
   special_char_indices: HashSet<Point>,
@@ -121,7 +113,6 @@ struct EngineSchematic {
 impl FromIterator<Vec<char>> for EngineSchematic {
   fn from_iter<T: IntoIterator<Item = Vec<char>>>(iter: T) -> Self {
     let mut special_chars = Vec::new();
-    let mut digits = Vec::new();
     let mut numbers = Vec::new();
     let mut current_number_string = String::new();
     let mut current_number = Number {
@@ -132,10 +123,6 @@ impl FromIterator<Vec<char>> for EngineSchematic {
     for (x, row) in iter.into_iter().enumerate() {
       for (y, c) in row.into_iter().enumerate() {
         if c.is_digit(10) {
-          digits.push(Digit {
-            digit: c,
-            point: Point { x, y },
-          });
           current_number.points.insert(Point { x, y });
           current_number_string.push(c);
         } else {
@@ -173,7 +160,6 @@ impl FromIterator<Vec<char>> for EngineSchematic {
     }
     Self {
       special_chars: special_chars.clone(),
-      digits,
       numbers,
       special_char_indices: special_chars
         .iter()
@@ -218,7 +204,6 @@ impl Day3 {
         .into_iter()
         .map(|line| line.chars().collect::<Vec<_>>())
         .collect::<EngineSchematic>(),
-      part_numbers: Vec::new(),
     }
   }
 }
